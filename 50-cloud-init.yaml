@@ -1,0 +1,33 @@
+# change IP addresses, search and wlan0 info to suit your lan
+network:
+    ethernets:
+        eth0:
+          optional: true
+          dhcp4: false
+          dhcp6: false
+    wifis:
+      wlan0:
+         dhcp4: false
+         dhcp6: false
+         access-points:
+           "your-SSID":
+              password: "your-wlan-pw"
+
+    bonds:
+       bond0:
+         dhcp4: false
+         dhcp6: false
+         interfaces: [eth0, wlan0]
+         addresses:
+                - 192.168.0.17/24
+         gateway4: 192.168.0.1
+         nameservers:
+                addresses: [192.168.0.18, 192.168.0.17, 8.8.8.8]
+                search: [home.local]
+         parameters:
+           mode: balance-xor
+           lacp-rate: fast
+           mii-monitor-interval: 100
+           fail-over-mac-policy: active
+         optional: true
+    version: 2
